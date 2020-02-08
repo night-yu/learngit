@@ -31,6 +31,8 @@ class Solution {
                 l = mid + 1;
             }
         }
+        // l 的取值区间为[0，len) , 循环终止时，l == r which is l == len
+        // 最后return的是l，所以l == len可能越界，因此要check l == len
         if(l == len) return -1;
         return nums[l] == target ? l:-1;
     }
@@ -49,6 +51,8 @@ class Solution {
                 l = mid + 1;
             }
         }
+        // l 的取值区间为[0，len) , 循环终止时，l == r which is l == len
+        // 最后return的是l - 1，所以l == 0可能越界，因此要check l == 0
         if(l == 0) return -1;
         return nums[l-1] == target? l - 1 : -1;
     }
