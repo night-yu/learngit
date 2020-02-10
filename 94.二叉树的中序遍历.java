@@ -19,13 +19,30 @@ import java.util.LinkedList;
  * }
  */
 class Solution {
+    class colorNode{
+        char color;
+        TreeNode Node;
+        public colorNode(TreeNode _node, char _color) {
+            this.color = _color;
+            this.Node = _node;
+        }
+    }
     public List<Integer> inorderTraversal(TreeNode root) {
         if(root == null) return new ArrayList();
-        Deque <Integer> stack = new LinkedList<Integer>();
-        stack.add(root.val);
-        while(!stack.isEmpty()){
-            
+        List<Integer> res = new ArrayList();
+        Deque <colorNode> stack = new LinkedList<colorNode>();
+        stack.push(new colorNode(root, 'W'));
+        while(!stack.isEmpty()) {
+            colorNode tmp = stack.pop();
+            if(tmp.color=='W') {
+                if(tmp.Node.right != null) stack.push(new colorNode(tmp.Node.right, 'W'));
+                stack.push(new colorNode(tmp.Node, 'G'));
+                if(tmp.Node.left != null) stack.push(new colorNode(tmp.Node.left, 'W'));
+            } else {
+                res.add(tmp.Node.val);
+            }
         }
+        return res;
     }
 }
 // @lc code=end
